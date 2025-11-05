@@ -10,7 +10,7 @@ export async function createProduct(req, res) {
   try {
     const { name, price } = req.body;
     if (!name || !price) {
-      return res.status(400).json({ message: "Namn och pris krävs" });
+      return res.status(400).json({ message: "Namn och pris krävs " });
     }
     const product = await Product.create({ name, price });
     res.status(201).json(product);
