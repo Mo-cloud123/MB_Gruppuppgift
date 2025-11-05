@@ -1,12 +1,19 @@
 import { Router } from "express";
-import { getHealth } from "../controllers/productController.js";
+import {
+  createProduct,
+  getProducts,
+  getProduct,
+  updateProduct,
+  deleteProduct,
+} from "../controllers/productController.js";
 
 const router = Router();
 
-// Healthcheck (tillfälligt här)
-router.get("/health", getHealth);
-
-// CRUD för produkter läggs till i nästa branch
+router.get("/", getProducts);         // GET /api/products
+router.get("/:id", getProduct);       // GET /api/products/:id
+router.post("/", createProduct);      // POST /api/products
+router.put("/:id", updateProduct);    // PUT /api/products/:id
+router.delete("/:id", deleteProduct); // DELETE /api/products/:id
 
 export default router;
 
