@@ -7,6 +7,7 @@ export default function Navbar() {
         <div className="brand">MB-Project</div>
         <nav className="nav-links">
           <NavLink to="/" end>Hem</NavLink>
+          <NavLink to="/products">Produkter</NavLink>
           <NavLink to="/contact-us">Kontakta oss</NavLink>
           <NavLink to="/about">Om oss</NavLink>
         </nav>

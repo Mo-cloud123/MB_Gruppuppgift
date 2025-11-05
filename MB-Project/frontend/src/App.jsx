@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import ContactUs from "./components/ContactUs";
 import About from "./components/About";
+import Products from "./components/Products";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <main className="container">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/about" element={<About />} />
         </Routes>
