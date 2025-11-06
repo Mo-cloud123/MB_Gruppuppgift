@@ -1,19 +1,30 @@
 import { useState } from "react";
+import Toast from "./Toast.jsx";
 
 export default function ContactUs() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [toast, setToast] = useState(null);
 
   const onChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const onSubmit = (e) => {
     e.preventDefault();
-    alert("I nästa branch skickar vi detta till backend 🤝");
+    setToast({ message: "Tack för ditt meddelande! Vi hör av oss så fort som möjligt.", type: "success" });
+    setForm({ name: "", email: "", message: "" });
   };
 
   return (
-    <section className="card">
-      <h1>Kontakta oss</h1>
+    <>
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+      <section className="card">
+        <h1>Kontakta oss</h1>
       <form className="form" onSubmit={onSubmit}>
         <label>
           Namn
@@ -29,7 +40,8 @@ export default function ContactUs() {
         </label>
         <button type="submit" className="btn">Skicka</button>
       </form>
-    </section>
+      </section>
+    </>
   );
 }
 

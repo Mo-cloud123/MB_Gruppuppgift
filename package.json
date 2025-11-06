@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm:dev:frontend\" \"npm:dev:backend\"",
+    "dev:frontend": "npm run dev --prefix MB-Project/frontend",
+    "dev:backend": "npm run dev --prefix MB-Project/backend"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,7 @@
     "mongoose": "^8.19.3"
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "nodemon": "^3.1.10"
   }
 }

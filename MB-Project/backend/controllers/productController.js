@@ -9,10 +9,18 @@ import { Product } from "../models/Product.js";
 export async function createProduct(req, res) {
   try {
     const { name, price } = req.body;
-    if (!name || !price) {
-      return res.status(400).json({ message: "Namn och pris krävs " });
+    const trimmedName = typeof name === "string" ? name.trim() : "";
+    // Tillåt inkommande pris som sträng med kommatecken
+    const numericPrice = Number(String(price).replace(",", "."));
+
+    if (!trimmedName) {
+      return res.status(400).json({ message: "Namn krävs" });
     }
-    const product = await Product.create({ name, price });
+    if (Number.isNaN(numericPrice) || numericPrice < 0) {
+      return res.status(400).json({ message: "Ogiltigt pris" });
+    }
+
+    const product = await Product.create({ name: trimmedName, price: numericPrice });
     res.status(201).json(product);
   } catch (err) {
     console.error("Fel vid skapande:", err.message);
@@ -45,9 +53,24 @@ export async function getProduct(req, res) {
 export async function updateProduct(req, res) {
   try {
     const { name, price } = req.body;
+    const update = {};
+    if (typeof name === "string") {
+      const trimmedName = name.trim();
+      if (!trimmedName) {
+        return res.status(400).json({ message: "Namn får inte vara tomt" });
+      }
+      update.name = trimmedName;
+    }
+    if (price !== undefined) {
+      const numericPrice = Number(String(price).replace(",", "."));
+      if (Number.isNaN(numericPrice) || numericPrice < 0) {
+        return res.status(400).json({ message: "Ogiltigt pris" });
+      }
+      update.price = numericPrice;
+    }
     const product = await Product.findByIdAndUpdate(
       req.params.id,
-      { name, price },
+      update,
       { new: true, runValidators: true }
     );
     if (!product) return res.status(404).json({ message: "Produkt ej hittad" });
