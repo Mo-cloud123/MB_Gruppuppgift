@@ -1,10 +1,14 @@
 export default function About() {
   return (
     <section className="card">
-      <h1>Om projektet</h1>
+      <h1>Om oss</h1>
       <p>
-        Prototyp för kursuppgift: React-frontend + Express-backend med CRUD,
-        JWT-auth och tydlig branchstrategi. Varje medlem bygger en egen undersida.
+        Välkommen till vår butik! Vi är dedikerade till att erbjuda högkvalitativa produkter 
+        till våra kunder. Vårt mål är att ge dig en smidig och trevlig shoppingupplevelse.
+      </p>
+      <p>
+        Vi strävar efter att kontinuerligt förbättra vår service och utbud för att möta dina behov. 
+        Om du har några frågor eller förslag, tveka inte att kontakta oss!
       </p>
     </section>
   );
